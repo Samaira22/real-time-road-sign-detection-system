@@ -10,7 +10,6 @@ MODEL_PATH = "models/best.pt"
 
 def detect_video(video_path):
     model = YOLO(MODEL_PATH)
-
     cap = cv2.VideoCapture(video_path)
 
     if not cap.isOpened():
@@ -27,7 +26,6 @@ def detect_video(video_path):
 
         for result in results:
             for box in result.boxes:
-
                 class_id = int(box.cls[0])
                 confidence = float(box.conf[0])
                 class_name = model.names[class_id]
@@ -55,11 +53,7 @@ def detect_video(video_path):
                 insert_detection(class_name, confidence)
 
                 if ALERT_ENABLED:
-                    check_alert(
-                        class_name,
-                        confidence,
-                        ALERT_COOLDOWN
-                    )
+                    check_alert(class_name, ALERT_COOLDOWN)
 
         cv2.imshow("Road Sign Video Detection", frame)
 
@@ -74,6 +68,4 @@ if __name__ == "__main__":
     create_database()
 
     video_path = input("Enter video path: ")
-
     detect_video(video_path)
-    

@@ -1,12 +1,7 @@
 import cv2
 from ultralytics import YOLO
 
-from config.config import (
-    CONFIDENCE_THRESHOLD,
-    STOP_SIGN_CLASS,
-    ALERT_ENABLED,
-    ALERT_COOLDOWN
-)
+from config.config import CONFIDENCE_THRESHOLD, ALERT_ENABLED, ALERT_COOLDOWN
 from detector.alert import check_alert
 from storage.db import create_database, insert_detection
 
@@ -16,7 +11,6 @@ model = YOLO(MODEL_PATH)
 
 
 def detect_webcam():
-
     cap = cv2.VideoCapture(0)
 
     if not cap.isOpened():
@@ -24,7 +18,6 @@ def detect_webcam():
         return
 
     while True:
-
         ret, frame = cap.read()
 
         if not ret:
@@ -34,9 +27,7 @@ def detect_webcam():
         results = model(frame, conf=CONFIDENCE_THRESHOLD)
 
         for result in results:
-
             for box in result.boxes:
-
                 class_id = int(box.cls[0])
                 confidence = float(box.conf[0])
                 class_name = model.names[class_id]
@@ -61,16 +52,10 @@ def detect_webcam():
                     2
                 )
 
-                # Save detection to database
                 insert_detection(class_name, confidence)
 
-                # Trigger alert for STOP sign
                 if ALERT_ENABLED:
-                    check_alert(
-                        class_name,
-                        confidence,
-                        ALERT_COOLDOWN
-                    )
+                    check_alert(class_name, ALERT_COOLDOWN)
 
         cv2.imshow("Live Road Sign Detection", frame)
 
@@ -82,6 +67,7 @@ def detect_webcam():
 
     cap.release()
     cv2.destroyAllWindows()
+
 
 if __name__ == "__main__":
     create_database()

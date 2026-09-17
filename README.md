@@ -1,5 +1,4 @@
-# PROJECT TITLE: 
-Real-Time Road Sign Detection, Alert & Analytics System
+# PROJECT TITLE: Real-Time Road Sign Detection, Alert & Analytics System
 
 A Computer Vision-based road sign detection system that uses a trained YOLOv8n object detection model to detect traffic signs from webcam and video input, generate stop-sign alerts, store detection data, and visualize detection statistics through an analytics dashboard.
 
@@ -8,6 +7,7 @@ A Computer Vision-based road sign detection system that uses a trained YOLOv8n o
 Road signs provide important information to drivers and help maintain road safety. 
 The project fine-tunes YOLOv8 on the [Kaggle Road Sign Detection dataset](https://www.kaggle.com/datasets/andrewmvd/road-sign-detection) and deploys the trained model in a live detection loop that runs on a webcam or video file.Detecting these signs automatically from images or video can support intelligent transportation and driver-assistance applications.
 
+## 2. Features
 The system:
 
 - Detects road signs using YOLOv8n
@@ -19,13 +19,13 @@ The system:
 - Provides an analytics dashboard using Streamlit
 - Displays detection statistics and detection timelines
 
-## 2. Problem Statement
+## 3. Problem Statement
 
 Manual identification of road signs from continuous video footage is difficult and cannot provide automated real-time assistance.
 
 The objective of this project is to develop a Computer Vision system that can automatically detect selected road signs from images and video, provide alerts for important signs such as stop signs, and maintain detection records for analysis.
 
-## 3. Objectives
+## 4. Objectives
 
 - Detect road signs automatically using Computer Vision.
 - Apply YOLOv8n for object detection.
@@ -36,7 +36,7 @@ The objective of this project is to develop a Computer Vision system that can au
 - Provide visual analytics through a dashboard.
 - Maintain a modular and testable project structure.
 
-## 4. Detected Classes
+## 5. Detected Classes
 
 The trained model detects four road-sign classes:
 
@@ -47,7 +47,23 @@ The trained model detects four road-sign classes:
 | `speedlimit` | Speed limit sign |
 | `crosswalk` | Crosswalk sign |
 
-## 5. System Features
+## 6. Architecture
+
+```
+Module 1: Data & Training          Module 2: Live Detection        Module 3: Analytics
+------------------------           -------------------------       --------------------
+Kaggle dataset                     Webcam / video file
+     |                                    |
+VOC -> YOLO conversion             YOLOv8 inference (best.pt)
+     |                                    |            \
+YOLOv8 training  ---> best.pt ----------->|             \--> alert.py (stop-sign alert)
+                                            |
+                                     storage/db.py (log each detection)
+                                            |
+                                     analytics/dashboard.py (summary + charts)
+```
+
+## 7. System Modules
 
 ### Module 1 – YOLOv8n Road Sign Detection
 
@@ -149,22 +165,7 @@ road_sign_detection/
 - Plotly
 - Git & GitHub
 
-## 9. Model Performance
-
-The trained YOLOv8n model was evaluated using object-detection metrics.
-
-| Metric | Result |
-|---|---:|
-| Precision | 0.967 |
-| Recall | 0.896 |
-| mAP@50 | 0.922 |
-| mAP@50–95 | 0.765 |
-| Training Epochs | 34 |
-| Number of Classes | 4 |
-
-The model achieved a strong detection performance on the evaluation data while remaining lightweight enough for practical video-based inference.
-
-## 10. Installation
+## 9. Installation and setup
 
 ### Prerequisites
 
@@ -186,7 +187,7 @@ cd road-sign-detection
 pip install -r requirements.txt
 ```
 
-## 11. Running the Project
+## 10. Running the Project
 
 ### A. Test the Camera
 
@@ -273,7 +274,7 @@ The dashboard displays:
 - Detection timeline
 - Recent detection records
 
-## 12. Database
+## 11. Database
 
 The project uses SQLite to store detection information.
 
@@ -296,7 +297,7 @@ trafficlight | 0.6274 | 2026-09-16 21:05:02
 
 Repeated detections of the same class within a short time interval are reduced using temporal logging.
 
-## 13. Testing
+## 12. Testing
 
 The project includes basic testing modules.
 
@@ -349,7 +350,7 @@ The system checks for:
 - Frame-reading failures
 - Database availability
 
-## 15. Design Decisions
+## 14. Design Decisions
 
 ### YOLOv8n
 
@@ -367,47 +368,11 @@ Streamlit was used to create the analytics dashboard quickly while keeping the a
 
 Detection, alert handling, database operations, configuration, analytics, and testing are maintained as separate modules to improve maintainability and readability.
 
-## 16. Future Enhancements
-
-- Add more road-sign classes.
-- Improve detection of unfamiliar signs.
-- Add audio alerts.
-- Add object tracking.
-- Add detection confidence filters to the dashboard.
-- Store GPS/location information.
-- Add automatic report generation.
-- Deploy the system as a web application.
-- Improve real-time performance using hardware acceleration.
-
-## 17. Challenges
-
-- Handling real-time video frames.
-- Integrating the trained detection model with OpenCV.
-- Managing repeated detections in continuous video.
-- Connecting detection results with SQLite.
-- Creating an analytics dashboard from detection records.
-- Maintaining modular imports and project structure.
-
-## 18. Learning Outcomes
-
-Through this project, the following concepts were applied:
-
-- Object detection
-- Image and video processing
-- OpenCV
-- YOLO-based Computer Vision
-- Bounding-box detection
-- Confidence-based prediction
-- Real-time video processing
-- SQLite database operations
-- Data visualization
-- Modular Python programming
-- Testing
-- Git and GitHub
-
-## 19. References
+## 15. References
 
 - Ultralytics YOLO Documentation
+- Dataset: Larxel, *Road Sign Detection*, Kaggle,
+  https://www.kaggle.com/datasets/andrewmvd/road-sign-detection
 - OpenCV Documentation
 - Python Documentation
 - Streamlit Documentation

@@ -2,14 +2,13 @@ import sqlite3
 import time
 
 DB_PATH = "storage/detections.db"
+LOG_COOLDOWN = 3
 
 last_logged = {}
-LOG_COOLDOWN = 3
 
 
 def create_database():
     conn = sqlite3.connect(DB_PATH)
-
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -26,16 +25,13 @@ def create_database():
 
 
 def insert_detection(class_name, confidence):
-
     current_time = time.time()
-
     last_time = last_logged.get(class_name, 0)
 
     if current_time - last_time < LOG_COOLDOWN:
         return
 
     conn = sqlite3.connect(DB_PATH)
-
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -50,9 +46,7 @@ def insert_detection(class_name, confidence):
 
 
 def get_detections():
-
     conn = sqlite3.connect(DB_PATH)
-
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -62,7 +56,6 @@ def get_detections():
     """)
 
     data = cursor.fetchall()
-
     conn.close()
 
     return data

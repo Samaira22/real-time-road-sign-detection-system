@@ -11,3 +11,4 @@ outputs/
 runs/
 
 *.log
+data/test_video.mp4

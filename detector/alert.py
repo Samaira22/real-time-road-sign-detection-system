@@ -2,15 +2,18 @@ import time
 
 last_alert_time = 0
 
-def check_alert(class_name, confidence, cooldown=3):
+
+def check_alert(class_name, cooldown=3):
     global last_alert_time
 
-    if class_name == "stop":
-        current_time = time.time()
+    if class_name != "stop":
+        return False
 
-        if current_time - last_alert_time >= cooldown:
-            print("⚠️ ALERT: STOP SIGN DETECTED!")
-            last_alert_time = current_time
-            return True
+    current_time = time.time()
+
+    if current_time - last_alert_time >= cooldown:
+        print("ALERT: STOP SIGN DETECTED!")
+        last_alert_time = current_time
+        return True
 
     return False
