@@ -254,7 +254,7 @@ or:
 ```text
 Esc
 ```
-
+Note: The sample test video used during development is not included in the repository. Users can provide their own road-sign video and enter its local path when prompted.
 to stop the video.
 
 ### D. Run the Analytics Dashboard
