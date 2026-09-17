@@ -90,7 +90,7 @@ YOLOv8 training  ---> best.pt ----------->|             \--> alert.py (stop-sign
 - Applies temporal logging to reduce repeated entries.
 - Provides detection statistics through Streamlit.
 
-## 6. System Architecture
+## 8. System Architecture
 
 ```text
              Webcam / Video Input
@@ -113,7 +113,7 @@ YOLOv8 training  ---> best.pt ----------->|             \--> alert.py (stop-sign
                      Analytics Dashboard
 ```
 
-## 7. Project Structure
+## 9. Project Structure
 
 ```text
 road_sign_detection/
@@ -137,7 +137,6 @@ road_sign_detection/
 ├── models/
 │   └── best.pt
 │
-├── outputs/
 │
 ├── storage/
 │   ├── db.py
@@ -153,7 +152,7 @@ road_sign_detection/
 └── README.md
 ```
 
-## 8. Technologies Used
+## 10. Technologies Used
 
 - Python
 - OpenCV
@@ -165,7 +164,7 @@ road_sign_detection/
 - Plotly
 - Git & GitHub
 
-## 9. Installation and setup
+## 11. Installation and setup
 
 ### Prerequisites
 
@@ -187,7 +186,7 @@ cd road-sign-detection
 pip install -r requirements.txt
 ```
 
-## 10. Running the Project
+## 12. Running the Project
 
 ### A. Test the Camera
 
@@ -274,7 +273,7 @@ The dashboard displays:
 - Detection timeline
 - Recent detection records
 
-## 11. Database
+## 13. Database
 
 The project uses SQLite to store detection information.
 
@@ -297,7 +296,7 @@ trafficlight | 0.6274 | 2026-09-16 21:05:02
 
 Repeated detections of the same class within a short time interval are reduced using temporal logging.
 
-## 12. Testing
+## 14. Testing
 
 The project includes basic testing modules.
 
@@ -319,7 +318,7 @@ The database test verifies:
 - Detection insertion
 - Detection retrieval
 
-## 14. Non-Functional Requirements
+## 15. Non-Functional Requirements
 
 ### Performance
 
@@ -350,7 +349,7 @@ The system checks for:
 - Frame-reading failures
 - Database availability
 
-## 14. Design Decisions
+## 16. Design Decisions
 
 ### YOLOv8n
 
@@ -368,7 +367,7 @@ Streamlit was used to create the analytics dashboard quickly while keeping the a
 
 Detection, alert handling, database operations, configuration, analytics, and testing are maintained as separate modules to improve maintainability and readability.
 
-## 15. References
+## 17. References
 
 - Ultralytics YOLO Documentation
 - Dataset: Larxel, *Road Sign Detection*, Kaggle,
